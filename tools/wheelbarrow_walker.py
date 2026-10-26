@@ -129,7 +129,7 @@ for sgn in (-1,1): g+=f'<rect x="{mx+12-2.7}" y="{my+sgn*11-(9 if sgn<0 else 0)}
 g+=f'<circle cx="{mx+29}" cy="{my+7}" r="1.2" fill="#ddd" stroke="#111" stroke-width=".3"/><circle cx="{mx+29}" cy="{my-7}" r="1.2" fill="#ddd" stroke="#111" stroke-width=".3"/>'
 g+=dim(mx,my+27,mx+66,my+27,"66 mm body")+dim(mx,my-24,mx+38,my-24,"gearbox 38")+dim(mx,my+22,mx+12,my+22,"12")+dim(mx+72,my-11,mx+72,my+11,"22",vert=True)+dim(mx+18,my+11,mx+18,my+20,"9",vert=True)+dim(mx-5,my-5,mx,my-5,"5")
 g+=tx(mx+33,my+1,"TT",3,b=True,c="#998")+tx(mx+12,my-21,"D-shaft Ø5.4 (flat 3.7)",2.2,"start")
-s3+=g+tx(150,212,"CHECK YOUR MOTOR",3.2,b=True,c=pr["color"])+tx(150,218,"Lay it on the drawing: body, both",2.4)+tx(150,222,"white shafts and the rear nub",2.4)+tx(150,226,"should match (± 1 mm).",2.4)+tx(150,232,"Different? Move the hip peg so it",2.4,c="#c00")+tx(150,236,"is still 30 mm above the shaft.",2.4,c="#c00")
+s3+=g+tx(150,212,"CHECK YOUR MOTOR",3.2,b=True,c=pr["color"])+tx(150,218,"Lay it on the drawing: body, both",2.4)+tx(150,222,"white shafts and the rear nub",2.4)+tx(150,226,"should match (± 1 mm).",2.4)+tx(150,232,"Different? Move the hip peg so it",2.4,c="#c00")+tx(150,236,f"is still {HH} mm above the shaft.",2.4,c="#c00")
 # ---------- sheet 4: torso covers, pads + 1:1 swing check
 s4=tx(105,40,"Torso covers, battery pad, hat - and a 1:1 side view to check your leg before gluing.",2.6,c="#555")
 x,y=14,52
