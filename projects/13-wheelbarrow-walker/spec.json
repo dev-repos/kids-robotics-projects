@@ -1,0 +1,467 @@
+{
+  "number": 13,
+  "slug": "13-wheelbarrow-walker",
+  "title": "Wheelbarrow Walker Robot",
+  "color": "#8d6e3f",
+  "topic": "walking worker pushing a free-rolling wheelbarrow, TT motor swing legs",
+  "age": "8+",
+  "time": "2 hours",
+  "reference": {
+    "description": "user sample #31 swing legs (3D print)",
+    "features": [
+      "bent thigh-knee-shin legs",
+      "long forward L-feet",
+      "pale link along thigh",
+      "hip and crank buttons outside",
+      "motor upright, can on top"
+    ],
+    "not_matched": [
+      "pale link is a glued stiffener, not separately driven",
+      "flat cardboard instead of rounded print",
+      "feet rock toe/heel at swing ends"
+    ]
+  },
+  "materials": [
+    "3 mm corrugated cardboard",
+    "3 ice-cream sticks",
+    "2 wheels (caps/65 mm)",
+    "3 mm skewers",
+    "paper straws",
+    "TT motor (double shaft)",
+    "2xAA holder + batteries",
+    "slide switch + wire",
+    "rubber bands",
+    "ping-pong ball + bottle cap",
+    "hot glue (grown-up)"
+  ],
+  "motor": {
+    "type": "TT gear motor, double shaft",
+    "length_mm": 66,
+    "width_mm": 22,
+    "gearbox_mm": 38,
+    "shaft_from_gearbox_end_mm": 12,
+    "shaft_d_mm": 5.4,
+    "shaft_flat_mm": 3.7,
+    "orientation": "upright, can on top",
+    "measured_from": "user photo with ruler (~12.3 px/mm); width from standard (photo perspective read 26)"
+  },
+  "mechanism": {
+    "name": "pendulum swing legs, slot + straw roller, cranks 180 deg apart",
+    "params_mm": {
+      "R_crank": 8,
+      "HH_hip_above_shaft": 26,
+      "LF_hip_to_sole": 88,
+      "slot_start": 13,
+      "slot_end": 39,
+      "slot_width": 5.5,
+      "toe": 42,
+      "heel": 12,
+      "foot_thick": 8
+    },
+    "description": "crank pin with straw roller runs in a leg slot on the hip-sole line; leg hangs from a 22 mm hip peg; foot glides nearly flat"
+  },
+  "geometry": {
+    "targets": {
+      "sweep_mm": 54,
+      "rise_mm": 4
+    },
+    "results": {
+      "sweep_mm": 54.2,
+      "rise_mm": 4.3,
+      "swing_deg": 17.9,
+      "pin_to_hip_mm": [
+        18,
+        34
+      ],
+      "slot_margin_mm": [
+        5,
+        5
+      ],
+      "shaft_above_table_mm": 62
+    },
+    "acceptance": [
+      "sweep within 10% of target",
+      "rise <= 5 mm",
+      "slot margin > 2 mm each end"
+    ],
+    "check_script": "tools/wheelbarrow_walker_check.py"
+  },
+  "sheets": [
+    {
+      "n": 1,
+      "title": "Barrow tray, side walls, axle hangers",
+      "parts": [
+        {
+          "name": "tray",
+          "qty": 1,
+          "material": "cardboard"
+        },
+        {
+          "name": "side wall",
+          "qty": 2,
+          "dims_mm": "trapezoid 90/70 x 40"
+        },
+        {
+          "name": "axle hanger",
+          "qty": 2,
+          "dims_mm": "30x15, hole 4"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Legs, soles, skewer/straw pieces",
+      "parts": [
+        {
+          "name": "leg L layer",
+          "qty": 2,
+          "dims_mm": "thigh 18 wide, hip-sole 88, foot 54, slot 5.5x26, hip 5.5"
+        },
+        {
+          "name": "leg R layer (mirror)",
+          "qty": 2
+        },
+        {
+          "name": "sole stick",
+          "qty": 2,
+          "material": "ice-cream stick",
+          "dims_mm": "54x10"
+        },
+        {
+          "name": "hip peg",
+          "qty": 2,
+          "material": "skewer",
+          "dims_mm": "22"
+        },
+        {
+          "name": "crank pin",
+          "qty": 2,
+          "material": "skewer",
+          "dims_mm": "18"
+        },
+        {
+          "name": "hip sleeve",
+          "qty": 2,
+          "material": "straw",
+          "dims_mm": "8"
+        },
+        {
+          "name": "roller",
+          "qty": 2,
+          "material": "straw",
+          "dims_mm": "6"
+        },
+        {
+          "name": "spacer",
+          "qty": 2,
+          "material": "straw",
+          "dims_mm": "5"
+        },
+        {
+          "name": "thigh link stick",
+          "qty": 2,
+          "material": "ice-cream stick",
+          "dims_mm": "~60"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Hip plates, cranks, buttons, motor outline",
+      "parts": [
+        {
+          "name": "hip plate",
+          "qty": 2,
+          "dims_mm": "50x60, cutout 30, hip peg 26 above shaft"
+        },
+        {
+          "name": "crank A",
+          "qty": 2,
+          "dims_mm": "18, pin at 8, D-hole"
+        },
+        {
+          "name": "crank B",
+          "qty": 2
+        },
+        {
+          "name": "button stopper",
+          "qty": 4,
+          "dims_mm": "10"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Torso covers, battery pad, hat, washers, switch plate, 1:1 swing check",
+      "parts": [
+        {
+          "name": "torso cover",
+          "qty": 2,
+          "dims_mm": "25x60 + tabs"
+        },
+        {
+          "name": "top",
+          "qty": 1,
+          "dims_mm": "25x50"
+        },
+        {
+          "name": "2xAA holder pad",
+          "qty": 1,
+          "dims_mm": "58x32"
+        },
+        {
+          "name": "hat brim",
+          "qty": 1,
+          "dims_mm": "32"
+        },
+        {
+          "name": "wheel washer",
+          "qty": 2,
+          "dims_mm": "20"
+        },
+        {
+          "name": "switch plate",
+          "qty": 1,
+          "dims_mm": "24, slot 8x4"
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "title": "Build steps card",
+      "parts": []
+    }
+  ],
+  "outputs": {
+    "full_pdf": "templates.pdf (12 pages: 5 templates incl. card + 7 assembly)",
+    "assembly_pdf": "assembly.pdf",
+    "card": [
+      "card.png",
+      "card.pdf"
+    ],
+    "templates": [
+      "template-1..5.png/.svg"
+    ],
+    "assembly_pages": [
+      "assembly-1..7.png/.svg"
+    ],
+    "generator": "tools/wheelbarrow_walker.py"
+  },
+  "video": {
+    "playlist": "PLeEznjsWgvDM",
+    "youtube_id": null
+  },
+  "commit": "bbb014d",
+  "card_steps": [
+    "Cut and fold the barrow tray (sheet 1). Glue the tabs inside.",
+    "Skewer axle through a straw under the tray; glue a wheel on each end. Wheels roll freely.",
+    "Hot-glue a hip plate (sheet 3) on each flat side of the TT motor, motor upright, shaft in the Ø30 hole.",
+    "Glue crank A on one shaft end, crank B on the other: the pins must point opposite ways.",
+    "Glue a 22 mm hip peg in each hip hole. Add a 5 mm straw spacer, then the leg (hip sleeve in its Ø5.5 hole).",
+    "Crank pin + straw roller sits in the leg slot. Glue button stoppers on peg and pin ends.",
+    "Glue torso covers, arms at the shoulders, hands onto the handles with both feet on the table.",
+    "2xAA + switch under the tray, wires along a handle to the motor. Switch on and he walks!"
+  ],
+  "assembly_steps": [
+    {
+      "n": 1,
+      "title": "Print and check",
+      "parts": "All 5 template sheets",
+      "tools": "Printer, ruler",
+      "do": "Print at 100% (Actual size), never 'fit to page'.",
+      "check": "The black bar on each sheet measures exactly 100 mm.",
+      "grownup": false,
+      "page": 1
+    },
+    {
+      "n": 2,
+      "title": "Cut out the parts",
+      "parts": "Sheet 1 tray, sheet 2 legs, sheet 3 plates & cranks, sheet 4 covers",
+      "tools": "Scissors, craft knife",
+      "do": "Glue each sheet on cardboard, then cut on the solid lines.",
+      "check": "You have 4 leg layers, 2 plates, 4 cranks, 4 buttons.",
+      "grownup": true,
+      "page": 1
+    },
+    {
+      "n": 3,
+      "title": "Poke the holes",
+      "parts": "Sheet 2: Leg L x2, Leg R x2",
+      "tools": "Pencil/awl, craft knife",
+      "do": "Poke the Ø5.5 hip holes; knife out the 5.5 mm slots.",
+      "check": "A straw slides into the hip hole; a straw fits the slot.",
+      "grownup": true,
+      "page": 1
+    },
+    {
+      "n": 4,
+      "title": "Glue the legs",
+      "parts": "Sheet 2: Leg layers x4 + 2 ice-cream sticks",
+      "tools": "Glue",
+      "do": "Glue 2 layers per leg, then the pale stick along the thigh front.",
+      "check": "Holes and slots line up; leg is flat and stiff.",
+      "grownup": false,
+      "page": 2
+    },
+    {
+      "n": 5,
+      "title": "Add the long feet",
+      "parts": "Sheet 2: Sole sticks x2 (54x10)",
+      "tools": "Glue, rubber bands",
+      "do": "Glue a sole stick under each foot, toe forward; add 2 bands.",
+      "check": "Both feet lie flat; toe points the walking way.",
+      "grownup": false,
+      "page": 2
+    },
+    {
+      "n": 6,
+      "title": "Fold the barrow tray",
+      "parts": "Sheet 1: tray + side walls",
+      "tools": "Ruler, glue",
+      "do": "Score the dashed lines, fold up and glue tabs inside.",
+      "check": "Tray box stands square and does not wobble.",
+      "grownup": false,
+      "page": 2
+    },
+    {
+      "n": 7,
+      "title": "Axle and wheels",
+      "parts": "Sheet 1 hangers, skewer 110 mm, straw, 2 wheels",
+      "tools": "Hot glue",
+      "do": "Straw under tray, skewer through, wheel glued on each end.",
+      "check": "Spin the wheels: they roll freely.",
+      "grownup": true,
+      "page": 3
+    },
+    {
+      "n": 8,
+      "title": "Hip plates on motor",
+      "parts": "Sheet 3: hip plates x2, TT motor",
+      "tools": "Hot glue",
+      "do": "Motor upright (can on top); plate on each side, shaft in Ø30 hole.",
+      "check": "Shaft is in the hole centre; hip hole is straight above.",
+      "grownup": true,
+      "page": 3
+    },
+    {
+      "n": 9,
+      "title": "Cranks A then B",
+      "parts": "Sheet 3: crank A x2, crank B x2",
+      "tools": "Glue",
+      "do": "Glue crank A on one shaft end, then B on the other side.",
+      "check": "Look from the side: pins point opposite (180°).",
+      "grownup": false,
+      "page": 3
+    },
+    {
+      "n": 10,
+      "title": "Hip pegs + spacers",
+      "parts": "Skewer 22 mm x2, straw 5 mm + 8 mm",
+      "tools": "Hot glue",
+      "do": "Glue a peg in each hip hole, 26 mm above shaft; slip on the spacer.",
+      "check": "Peg sticks out straight, not tilted.",
+      "grownup": true,
+      "page": 4
+    },
+    {
+      "n": 11,
+      "title": "Hang the left leg",
+      "parts": "Leg L, hip sleeve, button",
+      "tools": "Glue",
+      "do": "Slide the leg (sleeve in hip hole) on the left peg; glue a button on the outside.",
+      "check": "Leg swings freely, button stops it falling off.",
+      "grownup": false,
+      "page": 4
+    },
+    {
+      "n": 12,
+      "title": "Pin and roller",
+      "parts": "Skewer 18 mm, straw roller 6 mm, button",
+      "tools": "Glue",
+      "do": "Glue the crank pin, slip the roller on, put it in the slot, button outside.",
+      "check": "Roller slides along the slot without catching.",
+      "grownup": false,
+      "page": 4
+    },
+    {
+      "n": 13,
+      "title": "Right leg the same",
+      "parts": "Leg R, sleeve, roller, 2 buttons",
+      "tools": "Glue",
+      "do": "Repeat steps 11-12 on the other side (crank B).",
+      "check": "Legs hang opposite: one front, one back.",
+      "grownup": false,
+      "page": 5
+    },
+    {
+      "n": 14,
+      "title": "Hand-turn test",
+      "parts": "Sheet 4: 1:1 swing check",
+      "tools": "Fingers",
+      "do": "Turn the shaft slowly by hand for 3 full turns.",
+      "check": "No jams; foot sweeps about 54 mm like sheet 4.",
+      "grownup": false,
+      "page": 5
+    },
+    {
+      "n": 15,
+      "title": "Torso covers",
+      "parts": "Sheet 4: FRONT + BACK covers",
+      "tools": "Glue",
+      "do": "Glue the covers on the plate edges with the side tabs.",
+      "check": "Cranks and legs still turn freely.",
+      "grownup": false,
+      "page": 5
+    },
+    {
+      "n": 16,
+      "title": "Head and hat",
+      "parts": "Ping-pong ball, sheet 4 hat brim + bottle cap",
+      "tools": "Hot glue",
+      "do": "Glue the ball on the neck, brim and cap on top as a hat.",
+      "check": "Head sits straight; draw a face.",
+      "grownup": true,
+      "page": 6
+    },
+    {
+      "n": 17,
+      "title": "Arms to handles",
+      "parts": "Ice-cream stick arms, barrow",
+      "tools": "Hot glue",
+      "do": "Stand both feet on the table, glue hands onto the handles.",
+      "check": "Barrow wheels touch the table; feet flat.",
+      "grownup": true,
+      "page": 6
+    },
+    {
+      "n": 18,
+      "title": "Battery and switch",
+      "parts": "2xAA holder, switch plate (sheet 4), wires",
+      "tools": "Tape, glue",
+      "do": "Holder + switch under tray; wires along a handle to the motor.",
+      "check": "Wires do not touch the legs or cranks.",
+      "grownup": false,
+      "page": 6
+    },
+    {
+      "n": 19,
+      "title": "First walk!",
+      "parts": "Whole robot",
+      "tools": "Table",
+      "do": "Switch ON. Walks backwards? Swap the 2 motor wires.",
+      "check": "He pushes the barrow forward, wheels roll.",
+      "grownup": false,
+      "page": 7
+    },
+    {
+      "n": 20,
+      "title": "Troubleshooting",
+      "parts": "-",
+      "tools": "-",
+      "do": "Fix the most common problems:",
+      "check": "Still stuck? Re-check sheet 4 swing.",
+      "grownup": false,
+      "page": 7
+    }
+  ]
+}

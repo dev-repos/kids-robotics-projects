@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dev-repos.github.io/kids-robotics-projects/spec/project.schema.json",
+  "title": "Kids robotics project spec",
+  "type": "object",
+  "required": [
+    "number",
+    "slug",
+    "title",
+    "age",
+    "time",
+    "materials",
+    "mechanism",
+    "geometry",
+    "sheets",
+    "card_steps",
+    "assembly_steps",
+    "outputs"
+  ],
+  "properties": {
+    "number": {
+      "type": "integer"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "age": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_matched": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "motor": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "length_mm": {
+          "type": "number"
+        },
+        "width_mm": {
+          "type": "number"
+        },
+        "gearbox_mm": {
+          "type": "number"
+        },
+        "shaft_from_gearbox_end_mm": {
+          "type": "number"
+        },
+        "shaft_d_mm": {
+          "type": "number"
+        },
+        "shaft_flat_mm": {
+          "type": "number"
+        },
+        "orientation": {
+          "type": "string"
+        },
+        "measured_from": {
+          "type": "string"
+        }
+      }
+    },
+    "mechanism": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "params_mm": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "properties": {
+        "targets": {
+          "type": "object"
+        },
+        "results": {
+          "type": "object"
+        },
+        "acceptance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "check_script": {
+          "type": "string"
+        }
+      }
+    },
+    "sheets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "n",
+          "title",
+          "parts"
+        ],
+        "properties": {
+          "n": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "qty"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "integer"
+                },
+                "material": {
+                  "type": "string"
+                },
+                "dims_mm": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "card_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assembly_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "n",
+          "title",
+          "parts",
+          "tools",
+          "do",
+          "check",
+          "grownup"
+        ],
+        "properties": {
+          "n": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "string"
+          },
+          "tools": {
+            "type": "string"
+          },
+          "do": {
+            "type": "string"
+          },
+          "check": {
+            "type": "string"
+          },
+          "grownup": {
+            "type": "boolean"
+          },
+          "page": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {}
+    },
+    "video": {
+      "type": "object",
+      "properties": {
+        "playlist": {
+          "type": "string"
+        },
+        "youtube_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "commit": {
+      "type": "string"
+    }
+  }
+}
