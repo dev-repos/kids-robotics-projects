@@ -223,6 +223,7 @@ for j,l in enumerate(SF): s5+=tx(131,y+12+j*4.6,l,2.4,"start")
 N=5
 bodies=[sheet(pr,[],i+1,N).replace('</svg>','') for i in range(N)]
 bodies=[b+e for b,e in zip(bodies,[s1,s2,s3,s4,s5])]
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'wheelbarrow_walker_assembly.py')).read())
 from playwright.sync_api import sync_playwright
 from PIL import Image
 import numpy as np
@@ -233,9 +234,13 @@ with sync_playwright() as pw:
         f=f'{D_}/template-{i}.png';pg.screenshot(path=f,clip={"x":0,"y":0,"width":2480,"height":3508});Image.open(f).convert("RGB").save(f,dpi=(300,300))
         open(f'{D_}/template-{i}.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">{bd}</svg>')
         a=np.array(Image.open(f).convert('L'));row=a[int(267*11.811)];d=np.where(row<60)[0];d=d[(d>118)&(d<1417)];print(i,"bar px",d.max()-d.min()+1)
+    for i,bd in enumerate(asm,1):
+        pg.set_content(f'<html><body style="margin:0"><svg xmlns="http://www.w3.org/2000/svg" width="2480" height="3508" viewBox="0 0 210 297">{bd}</svg></body></html>')
+        f=f'{D_}/assembly-{i}.png';pg.screenshot(path=f,clip={"x":0,"y":0,"width":2480,"height":3508});Image.open(f).convert('RGB').save(f,dpi=(300,300))
+        open(f'{D_}/assembly-{i}.svg','w').write(f'<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">{bd}</svg>')
     def pdf(bs,out):
         pg.set_content('<html><head><style>@page{size:210mm 297mm;margin:0}body{margin:0}svg{display:block;page-break-after:always}</style></head><body>'+''.join(f'<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297">{x}</svg>' for x in bs)+'</body></html>')
         pg.pdf(path=out,width="210mm",height="297mm",print_background=True)
-    pdf(bodies,f'{D_}/templates.pdf'); pdf(bodies[4:],f'{D_}/card.pdf')
+    pdf(bodies+asm,f'{D_}/templates.pdf'); pdf(asm,f'{D_}/assembly.pdf'); pdf(bodies[4:],f'{D_}/card.pdf')
     b.close()
 shutil.copy(f'{D_}/template-5.png',f'{D_}/card.png')

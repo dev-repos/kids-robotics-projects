@@ -65,3 +65,9 @@ As the crank turns, the pin slides 18–34 mm from the hip (5 mm spare at each e
 ## How it works
 
 The motor shaft turns each crank pin in a circle 8 mm from the centre. The pin's straw roller sits in a slot in the leg, so as it goes round it pushes the leg front and back while sliding up and down the slot. The leg hangs from a hip peg above, so it swings like a pendulum: the foot sweeps about 54 mm along the table and barely lifts (about 4 mm). Because the two cranks are 180° apart, one foot swings back (pushing) while the other swings forward. The worker's stiff arms are glued to the handles, so he pushes the free-rolling wheelbarrow along in front of him.
+
+## Assembly guide (step by step)
+
+The full PDF [templates.pdf](templates.pdf) now has **12 pages**: the 5 template/steps sheets plus 7 assembly pages ([assembly.pdf](assembly.pdf) on its own; PNG: [1](assembly-1.png) [2](assembly-2.png) [3](assembly-3.png) [4](assembly-4.png) [5](assembly-5.png) [6](assembly-6.png) [7](assembly-7.png)). Each of the 20 steps has its own picture (new part in colour, earlier parts grey), parts + sheet, tools, one instruction, a check tip, and a red ! for grown-up steps.
+
+1. Print and check the 100 mm bar · 2. Cut out the parts (!) · 3. Poke the holes and slots (!) · 4. Glue leg layers + thigh stick · 5. Long feet: sole sticks + rubber bands · 6. Fold the barrow tray · 7. Axle, straw and wheels (!) · 8. Hip plates on the upright motor (!) · 9. Cranks A then B, 180° apart · 10. Hip pegs (26 mm above shaft) + spacers (!) · 11. Hang the left leg + button · 12. Crank pin + straw roller in the slot + button · 13. Right leg the same · 14. Hand-turn test against sheet 4 · 15. Torso covers · 16. Head and hat (!) · 17. Arms to handles (!) · 18. Battery and switch under the tray · 19. First walk (swap wires if backwards) · 20. Troubleshooting
