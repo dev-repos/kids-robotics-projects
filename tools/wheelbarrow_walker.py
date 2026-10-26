@@ -39,7 +39,7 @@ s1+=dim(x,y-3,x+70,y-3,"70 mm")+dim(x+12,y,x+12,y+45,"45 mm",vert=True)+tx(x+40,
 s1+=tx(105,40,"3 mm corrugated cardboard · grown-up cuts with craft knife",2.8,c="#555")
 s1=s1.replace('Barrow base 90x60 + 8 mm glue tabs','Barrow base 90x60 + 8 mm glue tabs (wheels roll freely)')
 # ---------- SWING LEGS (pendulum, after ref #31): hip peg 30 above shaft, crank R=8 roller in leg slot, foot 105 below hip
-R,HH,LF=8,30,105; SL0,SL1,SW=17,43,5.5   # slot from 17 to 43 mm below hip hole, 5.5 wide (straw roller Ø5)
+R,HH,LF=8,26,88; SL0,SL1,SW=13,39,5.5   # slot centreline 13..39 mm below hip, 5.5 wide (straw roller Ø5); foot sole 88 below hip
 def leg(th):  # math coords, shaft (0,0); returns pin P, hip H, foot F, angle
     P=(R*math.cos(th),R*math.sin(th)); a=math.atan2(P[0],HH-P[1])
     return P,(0,HH),(LF*math.sin(a),HH-LF*math.cos(a)),a
@@ -51,30 +51,37 @@ DMAX=max(math.hypot(leg(math.radians(i/2))[0][0],leg(math.radians(i/2))[0][1]-HH
 AMAX=max(abs(math.degrees(leg(math.radians(i/2))[3])) for i in range(720))
 print("sweep %.1f rise %.1f pin-to-hip %.1f..%.1f; slot centreline %d..%d (ends rounded, total %.1f..%.1f); pin-centre margin %.1f/%.1f; swing +-%.1f deg"%(SWEEP,RISE,DMIN,DMAX,SL0,SL1,SL0-SW/2,SL1+SW/2,DMIN-SL0,SL1-DMAX,AMAX))
 STICK="#c9a467"
-def legshape(ox,oy,ang=0,fill="#fff",w=.5,full=True):
-    # leg in local coords: hip at (0,0), down = +y on sheet. top 16 wide (hip at 8 from top), tapers to 10 at foot
-    pts=[(-8,-8),(8,-8),(8,SL1+6),(5,LF-2),(-5,LF-2),(-8,SL1+6)]
-    c,s=math.cos(ang),math.sin(ang); T=lambda p:(ox+p[0]*c-p[1]*s,oy+p[0]*s+p[1]*c)
-    g=f'<path d="M{T((-8,-8))[0]:.2f},{T((-8,-8))[1]:.2f} L'+' L'.join(f'{T(p)[0]:.2f},{T(p)[1]:.2f}' for p in pts[1:])+' Z" fill="'+fill+f'" stroke="#111" stroke-width="{w}"/>'
+TOE,HEEL,FT=42,12,8   # long foot: sole runs 42 mm forward, 12 mm back of the hip line, 8 mm deep
+LEGPTS=[(9,0),(10,38),(17,56),(8,LF-FT),(TOE-3,LF-FT),(TOE,LF-FT+3),(TOE,LF),(-HEEL,LF),(-HEEL,LF-FT),(-6,LF-FT),(2,60),(-9,40),(-9,0)]
+def legshape(ox,oy,ang=0,fill="#fff",w=.5,full=True,stick=False,mir=1):
+    # local coords: hip (0,0), x forward, y down. Bent leg: thigh with slot, forward knee, shin back under hip, long L-foot forward
+    c,s=math.cos(ang),math.sin(ang); T=lambda p:(ox+mir*p[0]*c-p[1]*s,oy+mir*p[0]*s+p[1]*c)
+    P=[T(p) for p in LEGPTS]; e=T((-9,0)); b=T((9,0))
+    g=f'<path d="M{P[0][0]:.2f},{P[0][1]:.2f} '+' '.join(f'L{x:.2f},{y:.2f}' for x,y in P[1:])+f' A9,9 0 0,{1 if mir>0 else 0} {b[0]:.2f},{b[1]:.2f} Z" fill="{fill}" stroke="#111" stroke-width="{w}"/>'
+    if stick:
+        q=[T(p) for p in ((3,-3),(9.5,-3),(16.5,55),(10,56))]
+        g+='<path d="M'+' L'.join(f'{x:.2f},{y:.2f}' for x,y in q)+' Z" fill="#a8d8a0" stroke="#111" stroke-width=".3"/>'
     if full:
         a,b=T((0,SL0)),T((0,SL1))
         g+=f'<line x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}" stroke="#111" stroke-width="{SW}" stroke-linecap="round"/><line x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}" stroke="#ddd" stroke-width="{SW-.8}" stroke-linecap="round"/>'
         h=T((0,0)); g+=f'<circle cx="{h[0]:.2f}" cy="{h[1]:.2f}" r="2.75" fill="#ddd" stroke="#111" stroke-width=".4"/>'
     return g
 # ---------- sheet 2: legs + feet + skewer/straw guide
-s2=tx(105,40,"3 mm corrugated cardboard. Cut 4 legs, glue them in pairs = 2 strong 6 mm legs (corrugation lengthwise).",2.6,c="#555")
-for i,lx in enumerate((34,70,106,142)):
-    oy=58; s2+=legshape(lx,oy)+tx(lx,oy+LF+6,f"Leg {i+1}",2.8,b=True)
-    s2+=tx(lx,oy-10,"HIP Ø5.5",2.2,b=True) if i==0 else ''
-    if i==0:
-        s2+=dim(lx-8,oy-12+1,lx+8,oy-12+1,"16")+dim(lx-5,oy+LF+1.5,lx+5,oy+LF+1.5,"10")
-        s2+=dim(lx-13,oy,lx-13,oy+SL0,f"{SL0}",vert=True)+dim(lx-13,oy+SL0,lx-13,oy+SL1,f"slot {SL1-SL0}",vert=True)+dim(lx-19,oy,lx-19,oy+LF,f"hip to foot {LF} mm",vert=True)
-        s2+=tx(lx+10,oy+30,f"slot {SW} wide",2.2,"start",c="#c00")
-s2+=tx(160,oy+20,"Glue pairs:",2.8,"start",b=True)+tx(160,oy+25,"1+2 = LEFT leg",2.6,"start")+tx(160,oy+29,"3+4 = RIGHT leg",2.6,"start")+tx(160,oy+36,"Cut the slot with",2.4,"start")+tx(160,oy+40,"a craft knife",2.4,"start")+tx(160,oy+44,"(grown-up), sand",2.4,"start")+tx(160,oy+48,"edges smooth so",2.4,"start")+tx(160,oy+52,"the roller glides.",2.4,"start")
-y=190; s2+=tx(14,y,"Feet x2 (ice-cream stick, cut)",3,"start",b=True)
-for i,fx in enumerate((14,54)):
-    yy=y+5; s2+=rect(fx,yy,30,10,"#f3e2c0")+dim(fx,yy-1.5,fx+30,yy-1.5,"30 mm")+dim(fx-3,yy,fx-3,yy+10,"10",vert=True)+tx(fx+15,yy+6.5,f"Foot {i+1}",2.6,b=True)
-s2+=tx(14,y+22,"Glue the leg bottom across the foot middle.",2.4,"start")+tx(14,y+26,"GRIP: 2 rubber bands round each foot -",2.4,"start",c="#c00")+tx(14,y+30,"the swinging foot pushes, so it must not slide.",2.4,"start",c="#c00")
+s2=tx(105,40,"3 mm corrugated cardboard. Trace and cut each leg TWICE, glue the two layers = one strong 6 mm leg.",2.6,c="#555")
+oy=58
+for i,(lx,m,nm) in enumerate(((40,1,"LEFT leg (cut 2)"),(150,-1,"RIGHT leg (cut 2, mirror)"))):
+    s2+=legshape(lx,oy,mir=m)+tx(lx,oy+LF+7,nm,2.8,b=True)+tx(lx+m*16,oy+2,"HIP Ø5.5",2.2,"start" if m>0 else "end",b=True)
+    s2+=f'<path d="M{lx+m*3},{oy-3} L{lx+m*9.5},{oy-3} L{lx+m*16.5},{oy+55} L{lx+m*10},{oy+56} Z" fill="none" stroke="#2a7" stroke-width=".35" stroke-dasharray="1 .8"/>'
+    s2+=tx(lx+m*30,oy+75,"walks this way",2.2,c="#06c")+f'<path d="M{lx+m*22},{oy+78} l{m*14},0 l{-m*2},-1.2 m{m*2},1.2 l{-m*2},1.2" stroke="#06c" stroke-width=".4" fill="none"/>'
+lx=40
+s2+=dim(lx-9,oy-11,lx+9,oy-11,"18")+dim(lx-14,oy,lx-14,oy+SL0,f"{SL0}",vert=True)+dim(lx-14,oy+SL0,lx-14,oy+SL1,f"slot {SL1-SL0}",vert=True)+dim(lx-22,oy,lx-22,oy+LF,f"hip to sole {LF} mm",vert=True)
+s2+=dim(lx-HEEL,oy+LF+2,lx+TOE,oy+LF+2,f"foot {TOE+HEEL} mm")+dim(lx+TOE+3,oy+LF-FT,lx+TOE+3,oy+LF,f"{FT}",vert=True)+dim(lx,oy+56,lx+17,oy+56,"knee 17")
+s2+=tx(lx+13,oy+26,f"slot {SW} wide",2.2,"start",c="#c00")+tx(lx+22,oy+30,"green dashes = glue",2.2,"start",c="#2a7")+tx(lx+22,oy+33.5,"the pale link stick",2.2,"start",c="#2a7")
+s2+=tx(105,oy+120,"Hip hole, slot and sole must stay on one straight line (the centre line) - that is what makes the foot glide flat.",2.4,c="#c00")
+y=190; s2+=tx(14,y,"Sole sticks x2 (ice-cream stick, cut)",3,"start",b=True)
+for i in range(2):
+    fx=14; yy=y+5+i*14; s2+=rect(fx,yy,TOE+HEEL,10,"#f3e2c0")+dim(fx,yy-1.5,fx+TOE+HEEL,yy-1.5,f"{TOE+HEEL} mm")+dim(fx-3,yy,fx-3,yy+10,"10",vert=True)+tx(fx+27,yy+6.5,f"Sole {i+1}",2.6,b=True)
+s2+=tx(14,y+36,"Glue a sole stick under each long foot (toe forward).",2.4,"start")+tx(14,y+40,"GRIP: 2 rubber bands round each foot -",2.4,"start",c="#c00")+tx(14,y+44,"the swinging foot pushes, so it must not slide.",2.4,"start",c="#c00")
 sx,sy=112,y; s2+=tx(sx,sy,"Skewer Ø3 + straw Ø5 - true length:",3,"start",b=True)
 SK=[("Hip peg (skewer)",22,2,"#e9c98f"),("Crank pin (skewer)",18,2,"#e9c98f"),("Hip sleeve (straw)",8,2,"#bfe3ff"),("Roller (straw)",6,2,"#bfe3ff"),("Spacer (straw)",5,2,"#bfe3ff")]
 yy=sy+8
@@ -82,7 +89,7 @@ for n,L,q,c in SK:
     hgt=3 if c=="#e9c98f" else 5
     s2+=f'<rect x="{sx}" y="{yy-hgt/2}" width="{L}" height="{hgt}" fill="{c}" stroke="#111" stroke-width=".4"/>'+dim(sx,yy-hgt/2-1.5,sx+L,yy-hgt/2-1.5,f"{L}")+tx(sx+26,yy+1,f"{n} x{q}",2.5,"start",b=True)
     yy+=8.5
-s2+=tx(14,y+48,"Wheel axle: skewer 110 mm (as before).  Stoppers: 4 cardboard buttons Ø10 (sheet 3) glued on pin/peg ends.",2.4,"start")
+s2+=tx(14,y+54,"Wheel axle: skewer 110 mm (as before).  Stoppers: 4 cardboard buttons Ø10 (sheet 3) glued on pin/peg ends.",2.4,"start")
 # ---------- sheet 3 hip plates + cranks + true-size motor guide
 s3=tx(105,40,"3 mm cardboard. Hip plates glue on the two shaft faces of the TT motor (gearbox end DOWN).",2.6,c="#555")
 def plate(ox,oy,i):  # shaft centre ox,oy; plate x[-25,25] y[-20,+40] math-up
@@ -141,10 +148,11 @@ s4+=f'<rect x="112" y="46" width="92" height="204" rx="3" fill="#f7fbff" stroke=
 s4+=f'<rect x="{ox-25}" y="{oy-40}" width="50" height="60" fill="#fff" stroke="#999" stroke-width=".3"/><rect x="{ox-9.5}" y="{oy-54}" width="19" height="66" fill="#fff3a0" stroke="#999" stroke-width=".3"/>'+tx(ox,oy-44,"TT",3,c="#998")
 G=oy-(HH-LF)+1
 s4+=ln(114,G,202,G,w=.5,c="#555")+tx(200,G+4,"table",2.4,"end",c="#555")
+s4+='<defs><clipPath id="ck"><rect x="112" y="60" width="92" height="190"/></clipPath></defs><g clip-path="url(#ck)">'
 for th,col,fl in ((0,"#888","#eee"),(180,"#888","#eee"),(90,"#111","#f3e2c0")):
-    P,H,F,a=leg(math.radians(th)); s4+=legshape(ox,oy-HH,a,fill=fl,w=.4 if col=="#888" else .5)
+    P,H,F,a=leg(math.radians(th)); s4+=legshape(ox,oy-HH,-a,fill=fl,w=.4 if col=="#888" else .5,stick=col=="#111")
     s4+=f'<circle cx="{ox+P[0]:.2f}" cy="{oy-P[1]:.2f}" r="2.5" fill="#bfe3ff" stroke="{col}" stroke-width=".4"/>'
-    s4+=f'<rect x="{ox+F[0]-15:.2f}" y="{oy-F[1]-1:.2f}" width="30" height="2" fill="{fl}" stroke="{col}" stroke-width=".3"/>'
+s4+='</g>'
 s4+=f'<circle cx="{ox}" cy="{oy}" r="{R}" fill="none" stroke="#06c" stroke-width=".35" stroke-dasharray="1 .7"/><circle cx="{ox}" cy="{oy}" r="1" fill="#06c"/>'
 s4+='<path d="M'+' L'.join(f'{ox+p[0]:.2f},{oy-p[1]+1:.2f}' for p in PATH[::4])+'" fill="none" stroke="#c00" stroke-width=".7"/>'
 s4+=dim(ox-SWEEP/2,G+6,ox+SWEEP/2,G+6,f"foot sweep {SWEEP:.0f} mm")
@@ -167,7 +175,7 @@ def pic(i,x,y):
     if i==6:
         P,H,F,a=leg(math.radians(20)); s=.24; f=lambda p:(x+22+p[0]*s,y+10-p[1]*s)
         p,h,ff=f(P),f(H),f(F)
-        g=f'<circle cx="{f((0,0))[0]}" cy="{f((0,0))[1]}" r="{R*s}" fill="none" stroke="#06c" stroke-width=".3"/>'+ln(*h,*ff,w=2,c=STICK)+ln(ff[0]-4,ff[1]+.5,ff[0]+4,ff[1]+.5,w=1.4,c="#555")+f'<circle cx="{p[0]:.2f}" cy="{p[1]:.2f}" r=".9" fill="#bfe3ff" stroke="#111" stroke-width=".3"/><circle cx="{h[0]:.2f}" cy="{h[1]:.2f}" r=".8" fill="#fff" stroke="#111" stroke-width=".3"/>'+tx(x+33,y+14,"roller",2,"start")+tx(x+33,y+17,"in slot",2,"start")
+        g=f'<circle cx="{f((0,0))[0]}" cy="{f((0,0))[1]}" r="{R*s}" fill="none" stroke="#06c" stroke-width=".3"/>'+f'<g transform=\"translate({h[0]},{h[1]}) scale({s}) translate({-h[0]},{-h[1]})\">'+legshape(h[0],h[1],-a,fill=STICK,w=1.2,stick=True).replace('stroke-width=\"5.5\"','stroke-width=\"5.5\"')+'</g>'+f'<circle cx="{p[0]:.2f}" cy="{p[1]:.2f}" r=".9" fill="#bfe3ff" stroke="#111" stroke-width=".3"/><circle cx="{h[0]:.2f}" cy="{h[1]:.2f}" r=".8" fill="#fff" stroke="#111" stroke-width=".3"/>'+tx(x+33,y+14,"roller",2,"start")+tx(x+33,y+17,"in slot",2,"start")
     if i==7: g=ln(x+4,y+10,x+38,y+22,w=2.2,c=STICK)+f'<circle cx="{x+8}" cy="{y+11.5}" r="2.5" fill="#fc0" stroke="#111" stroke-width=".4"/>'+tx(x+24,y+27,"glue hands",2.2)
     if i==8: g=f'<rect x="{x+4}" y="{y+8}" width="14" height="10" fill="#2a7" stroke="#111" stroke-width=".5"/>'+tx(x+11,y+14.5,"AA",2.4,c="#fff")+f'<rect x="{x+22}" y="{y+10}" width="8" height="5" fill="#ddd" stroke="#111" stroke-width=".4"/><rect x="{x+23}" y="{y+11}" width="3" height="3" fill="#111"/>'+tx(x+26,y+24,"ON = walk!",2.4,c="#c00",b=True)
     return g
@@ -193,8 +201,8 @@ s5+=f'<circle cx="{bx}" cy="{by}" r="{R*s}" fill="none" stroke="#06c" stroke-wid
 for th,col in ((0,"#06c"),(180,"#c00")):
     P,H,F,a=leg(math.radians(th)); h,p,ff=f(H),f(P),f(F)
     sl0=(h[0]+SL0*s*math.sin(a),h[1]+SL0*s*math.cos(a)); sl1=(h[0]+SL1*s*math.sin(a),h[1]+SL1*s*math.cos(a))
-    s5+=ln(*h,*ff,w=3,c=col)+f'<line x1="{sl0[0]:.2f}" y1="{sl0[1]:.2f}" x2="{sl1[0]:.2f}" y2="{sl1[1]:.2f}" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/>'
-    s5+=f'<circle cx="{p[0]:.2f}" cy="{p[1]:.2f}" r=".8" fill="#111"/>'+ln(bx,by,*p,w=.4,c="#111")+ln(ff[0]-4.5,ff[1]+.6,ff[0]+4.5,ff[1]+.6,w=1.2,c=col)
+    s5+=f'<g transform="translate({h[0]},{h[1]}) scale({s}) translate({-h[0]},{-h[1]})" opacity="{.55 if th==0 else 1}">'+legshape(h[0],h[1],-a,fill=("#2f5d3a" if th==180 else "#5b8f68"),w=1,stick=True)+f'<circle cx="{h[0]}" cy="{h[1]}" r="6" fill="#6a5a78" stroke="#111"/><circle cx="{h[0]+P[0]}" cy="{h[1]+(HH-P[1])}" r="5" fill="#6a5a78" stroke="#111"/></g>'
+    s5+=ln(bx,by,*p,w=.5,c="#111")
 s5+=f'<circle cx="{bx}" cy="{by-HH*s}" r=".9" fill="#fff" stroke="#111" stroke-width=".3"/>'
 s5+='<path d="M'+' L'.join(f'{f(p)[0]:.2f},{f(p)[1]+1.2:.2f}' for p in PATH[::6])+'" fill="none" stroke="#c00" stroke-width=".6"/>'
 # zoomed slot detail 1:1

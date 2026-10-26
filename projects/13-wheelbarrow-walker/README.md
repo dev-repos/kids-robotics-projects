@@ -29,15 +29,15 @@ Build a cardboard and ice-cream-stick worker whose **legs really walk, driven by
 | Part | Size |
 |---|---|
 | Crank radius (shaft centre to crank pin) | 8 mm, two cranks 180° apart (D-hole Ø5.4, flat 3.7) |
-| Hip peg | Ø3 skewer, 22 mm, exactly 30 mm straight above the motor shaft, in each hip plate |
-| Leg | 2 layers of 3 mm cardboard glued (6 mm), 16 mm wide at the hip tapering to 10 mm; hip hole Ø5.5 (straw sleeve) 8 mm from the top; hip to foot 105 mm |
-| Leg slot | 5.5 mm wide, centreline 17–43 mm below the hip hole (26 mm + round ends) |
+| Hip peg | Ø3 skewer, 22 mm, exactly 26 mm straight above the motor shaft, in each hip plate |
+| Leg | Bent leg like sample #31: 2 layers of 3 mm cardboard glued (6 mm), 18 mm wide thigh angled back to a knee, shin angled forward to a long L-foot (54 mm: 42 toe forward + 12 heel, 8 mm thick); hip hole Ø5.5 (straw sleeve) at the top; hip to sole 88 mm. A pale ice-cream-stick link (~60 mm) is glued along the front edge of the thigh as a stiffener; a 54×10 mm sole stick + rubber bands go under the foot. Hip button and crank-pin button sit on the OUTSIDE face of each leg |
+| Leg slot | 5.5 mm wide, centreline 13–39 mm below the hip hole (26 mm + round ends) |
 | Crank pin + roller | Ø3 skewer 18 mm + 6 mm straw roller (Ø5) that runs in the slot; cardboard button stopper Ø10 |
 | Spacer | 5 mm straw on each hip peg between plate and leg |
 | Foot | 30 x 10 mm ice-cream stick, rubber-band grip |
-| Shaft height above the table | about 75 mm |
+| Shaft height above the table | about 62 mm (motor upright, can on top) |
 
-As the crank turns, the pin slides 22–38 mm from the hip (5 mm spare at each end of the slot, so it never jams or falls out) and swings the leg ±15.5°. The foot sweeps **56 mm** front-to-back with only **3.8 mm** rise, a nearly flat line like the reference swing legs (54 mm / 4 mm). The script [tools/wheelbarrow_walker_check.py](../../tools/wheelbarrow_walker_check.py) checks this. Rubber-band grip feet and the worker leaning on the handles make the back-swinging foot push him forwards.
+As the crank turns, the pin slides 18–34 mm from the hip (5 mm spare at each end of the slot, so it never jams or falls out) and swings the leg ±17.9°. The foot sweeps **54.2 mm** front-to-back with only **4.3 mm** rise, a nearly flat line like the reference swing legs (54 mm / 4 mm). The script [tools/wheelbarrow_walker_check.py](../../tools/wheelbarrow_walker_check.py) checks this. Rubber-band grip feet and the worker leaning on the handles make the back-swinging foot push him forwards.
 
 ## Steps
 
@@ -64,4 +64,4 @@ As the crank turns, the pin slides 22–38 mm from the hip (5 mm spare at each e
 
 ## How it works
 
-The motor shaft turns each crank pin in a circle 8 mm from the centre. The pin's straw roller sits in a slot in the leg, so as it goes round it pushes the leg front and back while sliding up and down the slot. The leg hangs from a hip peg above, so it swings like a pendulum: the foot sweeps about 56 mm along the table and barely lifts (about 4 mm). Because the two cranks are 180° apart, one foot swings back (pushing) while the other swings forward. The worker's stiff arms are glued to the handles, so he pushes the free-rolling wheelbarrow along in front of him.
+The motor shaft turns each crank pin in a circle 8 mm from the centre. The pin's straw roller sits in a slot in the leg, so as it goes round it pushes the leg front and back while sliding up and down the slot. The leg hangs from a hip peg above, so it swings like a pendulum: the foot sweeps about 54 mm along the table and barely lifts (about 4 mm). Because the two cranks are 180° apart, one foot swings back (pushing) while the other swings forward. The worker's stiff arms are glued to the handles, so he pushes the free-rolling wheelbarrow along in front of him.
