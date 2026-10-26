@@ -20,7 +20,7 @@ Every topic lives in its own folder under `projects/` with a guide (`README.md`:
 | 10 | [Arduino Blink and Beep Robot](projects/10-arduino-blink-beep-robot/README.md) | 9+ | `blink_beep.ino` | [PNG](projects/10-arduino-blink-beep-robot/card.png) · [PDF](projects/10-arduino-blink-beep-robot/card.pdf) | [PDF](projects/10-arduino-blink-beep-robot/templates.pdf) (1 sheets) |
 | 11 | [Obstacle-Spotting Robot](projects/11-obstacle-avoiding-robot/README.md) | 10+ | `obstacle.ino` | [PNG](projects/11-obstacle-avoiding-robot/card.png) · [PDF](projects/11-obstacle-avoiding-robot/card.pdf) | [PDF](projects/11-obstacle-avoiding-robot/templates.pdf) (2 sheets) |
 | 12 | [Line-Follower Robot](projects/12-line-follower-robot/README.md) | 10+ | `line_follower.ino` | [PNG](projects/12-line-follower-robot/card.png) · [PDF](projects/12-line-follower-robot/card.pdf) | [PDF](projects/12-line-follower-robot/templates.pdf) (2 sheets) |
-| 13 | [Wheelbarrow Walker Robot](projects/13-wheelbarrow-walker/README.md) | 8+ | no code | [PNG](projects/13-wheelbarrow-walker/card.png) · [PDF](projects/13-wheelbarrow-walker/card.pdf) | [PDF](projects/13-wheelbarrow-walker/templates.pdf) (5 sheets) |
+| 13 | [Wheelbarrow Walker Robot](projects/13-wheelbarrow-walker/README.md) | 8+ | no code | [PNG](projects/13-wheelbarrow-walker/card.png) · [PDF](projects/13-wheelbarrow-walker/card.pdf) | [PDF](projects/13-wheelbarrow-walker/templates.pdf) (5 sheets) · [▶ Video](https://www.youtube.com/watch?v=CuGFnf--1Bo&list=PLeEznjsWgvDM) |
 
 ## Licence
 

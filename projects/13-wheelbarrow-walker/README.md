@@ -1,5 +1,7 @@
 # Project 13: Wheelbarrow Walker Robot
 
+▶ Video: https://www.youtube.com/watch?v=CuGFnf--1Bo&list=PLeEznjsWgvDM
+
 **Ages:** 8+ · **Time:** 2–3 hours · Build with a grown-up.
 
 ![Printable build card](card.png)
